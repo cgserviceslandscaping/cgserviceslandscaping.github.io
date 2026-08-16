@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cgserviceslandscaping.github.io/sitemap.xml
