@@ -6,4 +6,10 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://cgserviceslandscaping.github.io/landscaping-services-bucks-county.html</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
