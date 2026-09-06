@@ -51,6 +51,7 @@ Every major part is labeled START and END.
 {
   "@context": "https://schema.org",
   "@type": "LandscapingBusiness",
+  "@id": "https://cgserviceslandscaping.github.io/#business",
   "name": "C&G Services Lawn Care",
   "alternateName": "C&G Landscaping Services",
   "description": "Family-owned lawn care, landscaping and seasonal outdoor services serving Doylestown, Quakertown and communities across Bucks, Montgomery and Lehigh counties in Pennsylvania.",
@@ -81,6 +82,16 @@ Every major part is labeled START and END.
   "sameAs": [
     "https://www.facebook.com/p/CG-Services-Lawn-Care-100093026449679/"
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://cgserviceslandscaping.github.io/#website",
+  "url": "https://cgserviceslandscaping.github.io/",
+  "name": "C&G Services Lawn Care",
+  "alternateName": ["C&G Services", "C&G Landscaping Services"]
 }
 </script>
 
@@ -474,6 +485,22 @@ nav {
     margin: 0;
     color: #f0fdf4;
     opacity: 0.95;
+}
+
+.service-card-link {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    margin-top: 14px;
+    color: #f4d76f;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.service-card-link:hover,
+.service-card-link:focus-visible {
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 .service-card:hover {
@@ -2535,6 +2562,7 @@ footer a:hover { text-decoration: underline; }
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">🌿</span><span>Landscaping</span></h3>
                 <p>Custom landscape care that improves curb appeal, creates a cleaner outdoor appearance, and adds value to your property.</p>
+                <a class="service-card-link" href="landscaping-services-bucks-county.html">Landscaping services in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">✂️</span><span>Lawn Mowing</span></h3>
@@ -2958,6 +2986,7 @@ footer a:hover { text-decoration: underline; }
 <footer>
     <strong>© 2026 C&amp;G SERVICES</strong>
     <span>Family-Owned Outdoor Care · Landscaping · Lawn Care · Seasonal Services</span>
+    <a href="landscaping-services-bucks-county.html">Landscaping Services in Bucks County</a>
     <a href="mailto:cgserviceslandscaping1@gmail.com">cgserviceslandscaping1@gmail.com</a>
     <a href="https://www.facebook.com/p/CG-Services-Lawn-Care-100093026449679/" target="_blank" rel="noopener noreferrer">Facebook · C&amp;G Services Lawn Care ↗</a>
 </footer>
