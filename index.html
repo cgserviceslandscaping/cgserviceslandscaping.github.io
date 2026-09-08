@@ -27,21 +27,21 @@ Every major part is labeled START and END.
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C&amp;G Services Lawn Care &amp; Landscaping | Bucks County PA</title>
-<meta name="description" content="C&amp;G Services provides lawn care, landscaping, mulching, cleanups and snow removal in Doylestown, Quakertown, Bucks, Montgomery and Lehigh counties.">
+<title>C&amp;G Landscaping Services | Lawn Care in Bucks County PA</title>
+<meta name="description" content="C&amp;G Landscaping Services provides lawn mowing, edging, landscaping, mulching and seasonal cleanups in Quakertown, Doylestown and across Bucks County, PA.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#052e16">
 <link rel="canonical" href="https://cgserviceslandscaping.github.io/">
 <link rel="icon" type="image/webp" href="logo.webp">
 <link rel="preload" href="premium-landscape.webp" as="image">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="C&amp;G Services Lawn Care">
-<meta property="og:title" content="C&amp;G Services Lawn Care &amp; Landscaping | Bucks County PA">
+<meta property="og:site_name" content="C&amp;G Landscaping Services">
+<meta property="og:title" content="C&amp;G Landscaping Services | Lawn Care in Bucks County PA">
 <meta property="og:description" content="Local lawn care, landscaping and seasonal outdoor services in Doylestown, Quakertown and surrounding Pennsylvania communities.">
 <meta property="og:url" content="https://cgserviceslandscaping.github.io/">
 <meta property="og:image" content="https://cgserviceslandscaping.github.io/premium-landscape.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="C&amp;G Services Lawn Care">
+<meta name="twitter:title" content="C&amp;G Landscaping Services">
 <meta name="twitter:description" content="Lawn care, landscaping and seasonal outdoor services in Doylestown, Quakertown and nearby Pennsylvania communities.">
 <meta name="twitter:image" content="https://cgserviceslandscaping.github.io/premium-landscape.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,8 +52,8 @@ Every major part is labeled START and END.
   "@context": "https://schema.org",
   "@type": "LandscapingBusiness",
   "@id": "https://cgserviceslandscaping.github.io/#business",
-  "name": "C&G Services Lawn Care",
-  "alternateName": "C&G Landscaping Services",
+  "name": "C&G Landscaping Services",
+  "alternateName": ["C&G Services Lawn Care", "C&G Services"],
   "description": "Family-owned lawn care, landscaping and seasonal outdoor services serving Doylestown, Quakertown and communities across Bucks, Montgomery and Lehigh counties in Pennsylvania.",
   "url": "https://cgserviceslandscaping.github.io/",
   "logo": "https://cgserviceslandscaping.github.io/logo.webp",
@@ -90,8 +90,8 @@ Every major part is labeled START and END.
   "@type": "WebSite",
   "@id": "https://cgserviceslandscaping.github.io/#website",
   "url": "https://cgserviceslandscaping.github.io/",
-  "name": "C&G Services Lawn Care",
-  "alternateName": ["C&G Services", "C&G Landscaping Services"]
+  "name": "C&G Landscaping Services",
+  "alternateName": ["C&G Services", "C&G Services Lawn Care"]
 }
 </script>
 
@@ -2567,6 +2567,7 @@ footer a:hover { text-decoration: underline; }
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">✂️</span><span>Lawn Mowing</span></h3>
                 <p>Professional mowing, trimming, and edging for a sharp, consistent, and well-maintained lawn finish.</p>
+                <a class="service-card-link" href="lawn-care-services-bucks-county.html">Lawn care services in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">🍂</span><span>Mulching</span></h3>
@@ -2605,7 +2606,7 @@ footer a:hover { text-decoration: underline; }
 <!-- ==================== END: PART 6 — SERVICES ==================== -->
 
 
-<!-- ==================== START: PART 7 — GALLERY / ADMIN TOOLS ==================== -->
+<!-- ==================== START: PART 7 — PROJECT GALLERY ==================== -->
 <section id="gallery" class="gallery">
     <div class="gallery-inner">
         <div class="gallery-heading">
@@ -2626,69 +2627,21 @@ footer a:hover { text-decoration: underline; }
                 <strong>Real Local Projects</strong>
                 <span>Work completed by C&amp;G Services</span>
             </div>
-            <div class="gallery-showcase-item owner-only">
-                <strong>Updated by the Owner</strong>
-                <span>Only the administrator can add or remove photos</span>
+            <div class="gallery-showcase-item">
+                <strong>Local Outdoor Care</strong>
+                <span>Serving Bucks County and nearby areas</span>
             </div>
-        </div>
-
-        <a class="gallery-admin-access owner-only" href="#admin" aria-label="Open administrator gallery login">🔒 Administrator access</a>
-
-        <div id="adminLoginBox" class="admin-card">
-            <h3>Administrator Gallery Login</h3>
-            <p>This private area is for the C&amp;G Services administrator. Visitors can view the gallery but cannot make changes.</p>
-            <div class="admin-grid">
-                <input type="email" id="adminEmail" placeholder="Administrator email" autocomplete="username">
-                <input type="password" id="adminPassword" placeholder="Password" autocomplete="current-password">
-                <button type="button" id="adminLoginBtn">Login</button>
-            </div>
-            <p id="adminMessage" role="status"></p>
-        </div>
-
-        <div id="uploadPanel">
-            <div class="upload-panel-header">
-                <div>
-                    <h3>Gallery Manager</h3>
-                    <p>Add several project photos at once from your computer or phone.</p>
-                </div>
-                <button type="button" id="logoutBtn" class="logout-button">Sign Out</button>
-            </div>
-
-            <div class="admin-security-note">🔒 Administrator mode is active. Upload and delete controls are hidden from public visitors.</div>
-
-            <div id="dropZone" tabindex="0" role="button" aria-label="Choose or drop gallery pictures">
-                <div class="upload-icon" aria-hidden="true">📷</div>
-                <h3>Drop Project Photos Here</h3>
-                <p>or choose one or several pictures from your device</p>
-                <button type="button" class="upload-button">Choose Project Photos</button>
-                <input type="file" id="imageUpload" accept="image/*" multiple>
-                <small class="upload-help">JPG, PNG, or WebP · Maximum 10 MB per picture</small>
-            </div>
-
-            <div id="selectedFileSummary" class="selected-file-summary" aria-live="polite"></div>
-
-            <div class="progress-wrap" id="progressWrap">
-                <div id="uploadProgress"></div>
-            </div>
-
-            <p id="uploadMessage" role="status"></p>
-        </div>
-
-        <div id="contactInbox" class="admin-inbox">
-            <h3>Customer Requests</h3>
-            <p>Messages submitted through the estimate form will appear here.</p>
-            <div id="contactRequests"><p>No customer requests yet.</p></div>
         </div>
 
         <div class="gallery-grid-wrap" aria-label="Project gallery slider">
             <button id="gallerySliderPrev" class="gallery-slider-button gallery-slider-prev" type="button" aria-label="Show previous gallery pictures">‹</button>
             <div id="galleryGrid" class="gallery-grid" aria-live="polite">
-                <a class="gallery-item" href="thumbs/before1.webp" aria-label="Open gallery photo"><img src="thumbs/before1.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
-                <a class="gallery-item" href="thumbs/after2.webp" aria-label="Open gallery photo"><img src="thumbs/after2.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
-                <a class="gallery-item" href="thumbs/project3-after.webp" aria-label="Open gallery photo"><img src="thumbs/project3-after.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
-                <a class="gallery-item" href="thumbs/project3-before.webp" aria-label="Open gallery photo"><img src="thumbs/project3-before.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
-                <a class="gallery-item" href="thumbs/project4-after.webp" aria-label="Open gallery photo"><img src="thumbs/project4-after.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
-                <a class="gallery-item" href="thumbs/project4-before.webp" aria-label="Open gallery photo"><img src="thumbs/project4-before.webp" alt="C&amp;G Services gallery photo" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/before1.webp" aria-label="Open landscaping project photo"><img src="thumbs/before1.webp" alt="Bucks County landscaping project before work by C&amp;G Landscaping Services" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/after2.webp" aria-label="Open landscaping project photo"><img src="thumbs/after2.webp" alt="Finished landscaping project by C&amp;G Landscaping Services in Bucks County" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/project3-after.webp" aria-label="Open lawn care project photo"><img src="thumbs/project3-after.webp" alt="Completed lawn care project by C&amp;G Landscaping Services" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/project3-before.webp" aria-label="Open lawn care project photo"><img src="thumbs/project3-before.webp" alt="Bucks County lawn before professional lawn care" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/project4-after.webp" aria-label="Open outdoor project photo"><img src="thumbs/project4-after.webp" alt="Completed outdoor property care project in Bucks County" loading="lazy" decoding="async"></a>
+                <a class="gallery-item" href="thumbs/project4-before.webp" aria-label="Open outdoor project photo"><img src="thumbs/project4-before.webp" alt="Outdoor property before C&amp;G Landscaping Services project" loading="lazy" decoding="async"></a>
             </div>
             <button id="gallerySliderNext" class="gallery-slider-button gallery-slider-next" type="button" aria-label="Show more gallery pictures">›</button>
         </div>
@@ -2702,7 +2655,7 @@ footer a:hover { text-decoration: underline; }
         <div id="lightboxCounter" class="lightbox-counter"></div>
     </div>
 </section>
-<!-- ==================== END: PART 7 — GALLERY / ADMIN TOOLS ==================== -->
+<!-- ==================== END: PART 7 — PROJECT GALLERY ==================== -->
 
 
 <!-- ==================== START: PART 8 — CUSTOMER REVIEWS ==================== -->
@@ -2790,12 +2743,6 @@ footer a:hover { text-decoration: underline; }
         </form>
     </div>
 
-    <div id="reviewAdminPanel" class="review-admin-panel" hidden>
-        <h3>Review Approval</h3>
-        <p>Approve genuine customer reviews before they appear publicly. Only reviews rated 4 or 5 stars can be displayed.</p>
-        <div id="pendingReviews"><p>No reviews are waiting for approval.</p></div>
-    </div>
-
     <div class="review-trust-bar">
         <div class="review-trust-item">
             <div class="review-trust-icon">✓</div>
@@ -2840,10 +2787,10 @@ footer a:hover { text-decoration: underline; }
         </div>
         <div class="google-review-copy">
             <div class="google-review-kicker">Customer Reviews</div>
-            <h2 id="googleReviewsTitle">Find C&amp;G Services on Google</h2>
+            <h2 id="googleReviewsTitle">Find C&amp;G Landscaping Services on Google</h2>
             <p>See our latest customer feedback and help others discover dependable local landscaping and lawn care.</p>
         </div>
-        <a class="google-review-button" href="https://www.google.com/search?q=C%26G+Services+Lawn+Care+267-636-3755" target="_blank" rel="noopener noreferrer">Find Us on Google ↗</a>
+        <a class="google-review-button" href="https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755" target="_blank" rel="noopener noreferrer">Find Us on Google ↗</a>
     </div>
 </section>
 <!-- ==================== END: GOOGLE REVIEWS CTA ==================== -->
@@ -2984,15 +2931,25 @@ footer a:hover { text-decoration: underline; }
 
 <!-- ==================== START: PART 11 — FOOTER / CALL BUTTON ==================== -->
 <footer>
-    <strong>© 2026 C&amp;G SERVICES</strong>
+    <strong>© 2026 C&amp;G LANDSCAPING SERVICES</strong>
     <span>Family-Owned Outdoor Care · Landscaping · Lawn Care · Seasonal Services</span>
     <a href="landscaping-services-bucks-county.html">Landscaping Services in Bucks County</a>
+    <a href="lawn-care-services-bucks-county.html">Lawn Care Services in Bucks County</a>
     <a href="mailto:cgserviceslandscaping1@gmail.com">cgserviceslandscaping1@gmail.com</a>
     <a href="https://www.facebook.com/p/CG-Services-Lawn-Care-100093026449679/" target="_blank" rel="noopener noreferrer">Facebook · C&amp;G Services Lawn Care ↗</a>
 </footer>
 
 <a href="tel:2676363755" class="floating-call">📞 Call Now</a>
 <!-- ==================== END: PART 11 — FOOTER / CALL BUTTON ==================== -->
+
+<!-- Compatibility hooks keep the existing public forms and gallery script stable.
+     Owner tools now live on the separate no-index owner page. -->
+<div id="legacyOwnerHooks" hidden aria-hidden="true" data-nosnippet>
+    <div id="adminLoginBox"><input id="adminEmail" type="email"><input id="adminPassword" type="password"><button id="adminLoginBtn" type="button"></button><span id="adminMessage"></span></div>
+    <div id="uploadPanel"><input id="imageUpload" type="file" multiple><button id="dropZone" type="button"></button><span id="uploadMessage"></span><div id="progressWrap"><div id="uploadProgress"></div></div><button id="logoutBtn" type="button"></button><span id="selectedFileSummary"></span></div>
+    <div id="contactInbox"><div id="contactRequests"></div></div>
+    <div id="reviewAdminPanel"><div id="pendingReviews"></div></div>
+</div>
 
 <!-- ==================== START: WEBSITE JAVASCRIPT ==================== -->
 <script type="module">
@@ -3679,12 +3636,12 @@ let galleryPhotos = [];
 let currentGalleryIndex = 0;
 
 const LOCAL_GALLERY_PHOTOS = Object.freeze([
-    { url: "thumbs/before1.webp", thumbnailUrl: "thumbs/before1.webp", label: "Gallery Photo 01", alt: "C&G Services gallery photo" },
-    { url: "thumbs/after2.webp", thumbnailUrl: "thumbs/after2.webp", label: "Gallery Photo 02", alt: "C&G Services gallery photo" },
-    { url: "thumbs/project3-after.webp", thumbnailUrl: "thumbs/project3-after.webp", label: "Gallery Photo 03", alt: "C&G Services gallery photo" },
-    { url: "thumbs/project3-before.webp", thumbnailUrl: "thumbs/project3-before.webp", label: "Gallery Photo 04", alt: "C&G Services gallery photo" },
-    { url: "thumbs/project4-after.webp", thumbnailUrl: "thumbs/project4-after.webp", label: "Gallery Photo 05", alt: "C&G Services gallery photo" },
-    { url: "thumbs/project4-before.webp", thumbnailUrl: "thumbs/project4-before.webp", label: "Gallery Photo 06", alt: "C&G Services gallery photo" }
+    { url: "thumbs/before1.webp", thumbnailUrl: "thumbs/before1.webp", label: "Gallery Photo 01", alt: "Bucks County landscaping project before work" },
+    { url: "thumbs/after2.webp", thumbnailUrl: "thumbs/after2.webp", label: "Gallery Photo 02", alt: "Finished Bucks County landscaping project" },
+    { url: "thumbs/project3-after.webp", thumbnailUrl: "thumbs/project3-after.webp", label: "Gallery Photo 03", alt: "Completed lawn care project by C&G Landscaping Services" },
+    { url: "thumbs/project3-before.webp", thumbnailUrl: "thumbs/project3-before.webp", label: "Gallery Photo 04", alt: "Bucks County lawn before professional care" },
+    { url: "thumbs/project4-after.webp", thumbnailUrl: "thumbs/project4-after.webp", label: "Gallery Photo 05", alt: "Completed outdoor property care project" },
+    { url: "thumbs/project4-before.webp", thumbnailUrl: "thumbs/project4-before.webp", label: "Gallery Photo 06", alt: "Outdoor property before landscaping work" }
 ]);
 
 function showGalleryPhoto(index) {
@@ -3976,7 +3933,7 @@ if (configurationReady) {
 
                 const image = document.createElement("img");
                 image.src = data.publicUrl;
-                image.alt = "C&G Services gallery photo";
+                image.alt = `C&G Landscaping Services project photo ${index + 1} in Bucks County`;
                 image.loading = "lazy";
                 image.decoding = "async";
 
