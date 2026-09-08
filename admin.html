@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C&amp;G Owner Dashboard</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="theme-color" content="#052e16">
+<link rel="icon" href="logo.webp" type="image/webp">
+<style>
+:root{--dark:#021d0e;--green:#166534;--lime:#91d34b;--gold:#f3d66d;--paper:#f4f8f4;--ink:#102018;--red:#b91c1c}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Arial,sans-serif}.top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px clamp(18px,5vw,70px);color:white;background:var(--dark)}.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:800}.brand img{width:50px;height:50px;border-radius:12px}.top a{color:var(--gold)}main{width:min(1120px,calc(100% - 32px));margin:40px auto 70px}.card{padding:26px;margin:20px 0;border:1px solid #d9e5d8;border-radius:18px;background:white;box-shadow:0 10px 30px rgba(2,29,14,.08)}h1,h2{margin:0 0 12px;color:var(--dark)}h1{font-size:clamp(32px,5vw,50px)}h2{font-size:28px}.muted{color:#56705e}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}label{font-weight:700}input,button{min-height:46px;padding:11px 13px;border-radius:9px;font:inherit}input{border:1px solid #afc4b2}button{border:0;background:var(--green);color:white;font-weight:800;cursor:pointer}button.secondary{background:#e9f3e8;color:var(--dark)}button.danger{background:var(--red)}button:disabled{opacity:.55;cursor:not-allowed}.status{min-height:24px;font-weight:700}.dashboard[hidden],.login[hidden]{display:none}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.items{display:grid;gap:12px;margin-top:16px}.item{padding:16px;border:1px solid #dce7dc;border-left:5px solid var(--lime);border-radius:12px;background:#f9fcf8}.item p{margin:6px 0}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.actions button{min-height:38px;padding:8px 12px}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}.photo{overflow:hidden;border:1px solid #dce7dc;border-radius:12px;background:white}.photo img{display:block;width:100%;height:150px;object-fit:cover}.photo button{width:100%;border-radius:0}.upload{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.upload input{flex:1;min-width:240px}@media(max-width:760px){.grid,.photo-grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand"><img src="logo.webp" alt="" width="900" height="900">C&amp;G Owner Dashboard</div><a href="index.html">View public website</a></header>
+<main>
+  <section class="login card" id="loginCard">
+    <h1>Owner Sign In</h1><p class="muted">This private page is for the C&amp;G Landscaping Services owner.</p>
+    <form id="loginForm" class="grid"><div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" value="cgserviceslandscaping1@gmail.com" required></div><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div><button type="submit">Sign In</button></form>
+    <p class="status" id="loginStatus" role="status"></p>
+  </section>
+  <div class="dashboard" id="dashboard" hidden>
+    <div class="toolbar"><div><h1>Business Dashboard</h1><p class="muted" id="signedInAs"></p></div><button class="secondary" id="signOut" type="button">Sign Out</button></div>
+    <section class="card"><div class="toolbar"><div><h2>Customer Estimate Requests</h2><p class="muted">New requests sent through the website.</p></div><button class="secondary" data-refresh="requests" type="button">Refresh</button></div><div class="items" id="requests"><p>Loading…</p></div></section>
+    <section class="card"><div class="toolbar"><div><h2>Review Approval</h2><p class="muted">Only approved 4- or 5-star reviews can appear publicly.</p></div><button class="secondary" data-refresh="reviews" type="button">Refresh</button></div><div class="items" id="reviews"><p>Loading…</p></div></section>
+    <section class="card"><h2>Project Gallery</h2><p class="muted">Upload JPG, PNG or WebP photos. Maximum 10 MB each.</p><div class="upload"><input id="galleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple><button id="uploadButton" type="button">Upload Photos</button></div><p class="status" id="uploadStatus" role="status"></p><div class="photo-grid" id="photos"><p>Loading…</p></div></section>
+  </div>
+</main>
+<script>
+(() => {
+  "use strict";
+  const URL = "https://wkwyywkukmlonvjlkpjc.supabase.co";
+  const KEY = "sb_publishable_nw5Ltmxj_T-8t33Jsfg9dw_EAehTyDT";
+  const OWNER = "cgserviceslandscaping1@gmail.com";
+  const BUCKET = "gallery";
+  const FOLDER = "public";
+  let token = sessionStorage.getItem("cg_owner_token") || "";
+  let userEmail = sessionStorage.getItem("cg_owner_email") || "";
+  const $ = (id) => document.getElementById(id);
+  const authHeaders = (json = true) => ({ apikey: KEY, Authorization: `Bearer ${token}`, ...(json ? { "Content-Type": "application/json" } : {}) });
+  const showStatus = (element, message, error = false) => { element.textContent = message; element.style.color = error ? "#b91c1c" : "#166534"; };
+  const formatDate = (value) => value ? new Date(value).toLocaleString() : "Date unavailable";
+
+  async function api(path, options = {}) {
+    const response = await fetch(`${URL}${path}`, { ...options, headers: { ...authHeaders(options.body instanceof Blob ? false : true), ...(options.headers || {}) } });
+    if (!response.ok) {
+      let detail = "Request failed";
+      try { const body = await response.json(); detail = body.message || body.error_description || body.error || detail; } catch (_) {}
+      throw new Error(detail);
+    }
+    if (response.status === 204 || response.headers.get("content-length") === "0") return null;
+    return response.json();
+  }
+
+  function setSignedIn(signedIn) {
+    $("loginCard").hidden = signedIn;
+    $("dashboard").hidden = !signedIn;
+    if (signedIn) $("signedInAs").textContent = `Signed in as ${userEmail}`;
+  }
+
+  async function signIn(email, password) {
+    const response = await fetch(`${URL}/auth/v1/token?grant_type=password`, { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error_description || result.msg || "Sign-in failed");
+    const actualEmail = (result.user && result.user.email || "").toLowerCase();
+    if (actualEmail !== OWNER) throw new Error("This account is not authorized for the owner dashboard.");
+    token = result.access_token;
+    userEmail = actualEmail;
+    sessionStorage.setItem("cg_owner_token", token);
+    sessionStorage.setItem("cg_owner_email", userEmail);
+  }
+
+  function text(tag, content) { const el = document.createElement(tag); el.textContent = content; return el; }
+  function action(label, className, handler) { const button = text("button", label); button.type = "button"; button.className = className || ""; button.addEventListener("click", handler); return button; }
+
+  async function loadRequests() {
+    const root = $("requests"); root.replaceChildren(text("p", "Loading…"));
+    try {
+      const rows = await api("/rest/v1/estimate_requests?select=*&status=eq.open&order=created_at.desc");
+      root.replaceChildren();
+      if (!rows.length) return root.append(text("p", "No open customer requests."));
+      rows.forEach((row) => {
+        const item = document.createElement("article"); item.className = "item";
+        item.append(text("strong", `${row.name} — ${row.phone}`), text("p", `Service: ${row.service}`), text("p", row.message), text("p", formatDate(row.created_at)));
+        const buttons = document.createElement("div"); buttons.className = "actions";
+        buttons.append(action("Mark Complete", "", async () => { await api(`/rest/v1/estimate_requests?id=eq.${encodeURIComponent(row.id)}`, { method: "PATCH", body: JSON.stringify({ status: "completed" }), headers: { Prefer: "return=minimal" } }); await loadRequests(); }));
+        item.append(buttons); root.append(item);
+      });
+    } catch (error) { root.replaceChildren(text("p", `Requests could not be loaded: ${error.message}`)); }
+  }
+
+  async function loadReviews() {
+    const root = $("reviews"); root.replaceChildren(text("p", "Loading…"));
+    try {
+      const rows = await api("/rest/v1/reviews?select=*&status=eq.pending&order=created_at.asc");
+      root.replaceChildren();
+      if (!rows.length) return root.append(text("p", "No reviews are waiting for approval."));
+      rows.forEach((row) => {
+        const item = document.createElement("article"); item.className = "item";
+        item.append(text("strong", `${row.name} — ${row.rating}/5 — ${row.service}`), text("p", row.review), text("p", formatDate(row.created_at)));
+        const buttons = document.createElement("div"); buttons.className = "actions";
+        const rating = Number(row.rating);
+        const approve = action(rating >= 4 && rating <= 5 ? "Approve" : "Below 4 Stars", "", async () => { await api(`/rest/v1/reviews?id=eq.${encodeURIComponent(row.id)}`, { method: "PATCH", body: JSON.stringify({ status: "approved" }), headers: { Prefer: "return=minimal" } }); await loadReviews(); });
+        approve.disabled = !(rating >= 4 && rating <= 5);
+        buttons.append(approve, action("Delete", "danger", async () => { if (!confirm("Delete this review permanently?")) return; await api(`/rest/v1/reviews?id=eq.${encodeURIComponent(row.id)}`, { method: "DELETE", headers: { Prefer: "return=minimal" } }); await loadReviews(); }));
+        item.append(buttons); root.append(item);
+      });
+    } catch (error) { root.replaceChildren(text("p", `Reviews could not be loaded: ${error.message}`)); }
+  }
+
+  async function loadPhotos() {
+    const root = $("photos"); root.replaceChildren(text("p", "Loading…"));
+    try {
+      const files = await api(`/storage/v1/object/list/${BUCKET}`, { method: "POST", body: JSON.stringify({ prefix: FOLDER, limit: 100, offset: 0, sortBy: { column: "created_at", order: "desc" } }) });
+      const images = files.filter((file) => /\.(?:jpe?g|png|webp)$/i.test(file.name));
+      root.replaceChildren();
+      if (!images.length) return root.append(text("p", "No uploaded gallery photos."));
+      images.forEach((file) => {
+        const path = `${FOLDER}/${file.name}`;
+        const card = document.createElement("div"); card.className = "photo";
+        const image = document.createElement("img"); image.src = `${URL}/storage/v1/object/public/${BUCKET}/${encodeURI(path)}`; image.alt = "Uploaded project photo"; image.loading = "lazy";
+        card.append(image, action("Delete Photo", "danger", async () => { if (!confirm("Delete this gallery photo permanently?")) return; await api(`/storage/v1/object/${BUCKET}`, { method: "DELETE", body: JSON.stringify({ prefixes: [path] }) }); await loadPhotos(); }));
+        root.append(card);
+      });
+    } catch (error) { root.replaceChildren(text("p", `Gallery could not be loaded: ${error.message}`)); }
+  }
+
+  async function uploadPhotos() {
+    const files = [...$("galleryFiles").files];
+    if (!files.length) return showStatus($("uploadStatus"), "Choose at least one photo.", true);
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    for (const file of files) if (!allowed.includes(file.type) || file.size > 10 * 1024 * 1024) return showStatus($("uploadStatus"), `${file.name} must be JPG, PNG or WebP and no larger than 10 MB.`, true);
+    $("uploadButton").disabled = true;
+    try {
+      for (let index = 0; index < files.length; index += 1) {
+        const file = files[index];
+        showStatus($("uploadStatus"), `Uploading ${index + 1} of ${files.length}…`);
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
+        await api(`/storage/v1/object/${BUCKET}/${FOLDER}/${Date.now()}-${index}-${safeName}`, { method: "POST", body: file, headers: { "Content-Type": file.type, "x-upsert": "false" } });
+      }
+      $("galleryFiles").value = ""; showStatus($("uploadStatus"), "Photos uploaded successfully."); await loadPhotos();
+    } catch (error) { showStatus($("uploadStatus"), `Upload failed: ${error.message}`, true); }
+    finally { $("uploadButton").disabled = false; }
+  }
+
+  $("loginForm").addEventListener("submit", async (event) => { event.preventDefault(); showStatus($("loginStatus"), "Signing in…"); try { await signIn($("email").value.trim().toLowerCase(), $("password").value); $("password").value = ""; setSignedIn(true); await Promise.all([loadRequests(), loadReviews(), loadPhotos()]); } catch (error) { token = ""; showStatus($("loginStatus"), error.message, true); } });
+  $("signOut").addEventListener("click", async () => { try { await api("/auth/v1/logout", { method: "POST" }); } catch (_) {} token = ""; userEmail = ""; sessionStorage.removeItem("cg_owner_token"); sessionStorage.removeItem("cg_owner_email"); setSignedIn(false); });
+  $("uploadButton").addEventListener("click", uploadPhotos);
+  document.querySelector('[data-refresh="requests"]').addEventListener("click", loadRequests);
+  document.querySelector('[data-refresh="reviews"]').addEventListener("click", loadReviews);
+  if (token && userEmail === OWNER) { setSignedIn(true); Promise.all([loadRequests(), loadReviews(), loadPhotos()]); } else setSignedIn(false);
+})();
+</script>
+</body>
+</html>
