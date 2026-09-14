@@ -3358,7 +3358,7 @@ async function loadApprovedReviews() {
         });
         buildReviewCarouselControls();
     } catch (error) {
-        reviewsGrid.innerHTML = '<div class="review-empty">Customer reviews will appear here once the website connection is completed.</div>';
+        reviewsGrid.innerHTML = '<div class="review-empty">Customer reviews are temporarily unavailable. Please check back soon.</div>';
         buildReviewCarouselControls();
     }
 }
