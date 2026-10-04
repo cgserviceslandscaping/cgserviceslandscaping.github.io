@@ -2456,6 +2456,16 @@ footer a:hover { text-decoration: underline; }
 }
 /* ===== END: RESPONSIVE / MOBILE STYLES ===== */
 
+
+/* Seasonal service photographs, with room for legible copy beneath. */
+.service-photo{display:block;position:relative;z-index:1;width:calc(100% + 52px);max-width:none;height:190px;object-fit:cover;margin:-30px -26px 24px;border-radius:24px 24px 0 0}
+.seasonal-card{min-height:475px}.season-snow,.season-snow:hover{background:linear-gradient(145deg,#193d56,#102736)}
+.season-fall,.season-fall:hover{background:linear-gradient(145deg,#613718,#322214)}
+.season-spring,.season-spring:hover{background:linear-gradient(145deg,#294f31,#172c20)}
+.season-mulch,.season-mulch:hover{background:linear-gradient(145deg,#4c3c24,#252b1b)}
+.season-mowing,.season-mowing:hover{background:linear-gradient(145deg,#245031,#112e1e)}
+.season-aeration,.season-aeration:hover{background:linear-gradient(145deg,#394929,#1c2d1d)}
+@media(max-width:600px){.service-photo{height:210px}.seasonal-card{min-height:0}}
 </style>
 <!-- ==================== END: PART 2 — CSS STYLES ==================== -->
 </head>
@@ -2561,42 +2571,50 @@ footer a:hover { text-decoration: underline; }
         </p>
 
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card seasonal-card">
+                <img class="service-photo" src="premium-landscape.webp" alt="A landscaped garden with a green lawn and planting beds" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">🌿</span><span>Landscaping</span></h3>
                 <p>Custom landscape care that improves curb appeal, creates a cleaner outdoor appearance, and adds value to your property.</p>
                 <a class="service-card-link" href="landscaping-services-bucks-county.html">Landscaping services in Bucks County →</a>
             </div>
-            <div class="service-card">
+            <div class="service-card seasonal-card season-mowing">
+                <img class="service-photo" src="assets/mowing-card.webp" alt="A lush summer lawn with clean mowing stripes" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">✂️</span><span>Lawn Mowing</span></h3>
                 <p>Professional mowing, trimming, and edging for a sharp, consistent, and well-maintained lawn finish.</p>
                 <a class="service-card-link" href="lawn-mowing-bucks-county.html">Lawn mowing in Bucks County →</a>
             </div>
-            <div class="service-card">
+            <div class="service-card seasonal-card season-mulch">
+                <img class="service-photo" src="assets/mulch-card.webp" alt="Fresh dark mulch surrounding shrubs and garden flowers" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">🍂</span><span>Mulching</span></h3>
                 <p>Fresh mulch installation with clean bed lines, rich color, and a refined look that makes your landscape stand out.</p>
                 <a class="service-card-link" href="mulching-bucks-county.html">Mulching in Bucks County →</a>
             </div>
-            <div class="service-card">
+            <div class="service-card seasonal-card season-snow">
+                <img class="service-photo" src="assets/snow-card.webp" alt="Snow-covered trees beside a cleared driveway and walkway" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">❄️</span><span>Snow Removal</span></h3>
                 <p>Reliable winter service to help keep driveways, walkways, and outdoor areas safer during snow season.</p>
                 <a class="service-card-link" href="snow-removal-bucks-county.html">Snow Removal in Bucks County →</a>
             </div>
-            <div class="service-card">
+            <div class="service-card seasonal-card season-aeration">
+                <img class="service-photo" src="assets/aeration-card.webp" alt="Grass with core aeration holes and small soil plugs" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">🌱</span><span>Aeration</span></h3>
                 <p>Core aeration to support stronger roots, healthier soil, and a greener, fuller lawn throughout the season.</p>
                 <a class="service-card-link" href="aeration-bucks-county.html">Core Aeration in Bucks County →</a>
             </div>
-            <div class="service-card">
+            <div class="service-card seasonal-card season-spring">
+                <img class="service-photo" src="assets/spring-card.webp" alt="Spring blossoms above fresh green grass and garden beds" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">🧹</span><span>Spring Cleanup</span></h3>
                 <p>Seasonal cleanup that removes debris, refreshes your property, and prepares your yard for a clean new season.</p>
                 <a class="service-card-link" href="spring-cleanup-bucks-county.html">Spring Cleanup in Bucks County →</a>
             </div>
-            <div class="service-card fall-leaf-card">
+            <div class="service-card seasonal-card season-fall fall-leaf-card">
+                <img class="service-photo" src="assets/fall-card.webp" alt="Golden autumn trees and fallen leaves beside a lawn" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">🍁</span><span>Fall Leaf Cleanup</span></h3>
                 <p>Professional leaf clearing and seasonal cleanup to keep lawns, planting beds, walkways, and outdoor areas neat throughout the fall.</p>
                 <a class="service-card-link" href="leaf-cleanup-bucks-county.html">Fall Leaf Cleanup in Bucks County →</a>
             </div>
-            <div class="service-card more-services-card">
+            <div class="service-card seasonal-card more-services-card">
+                <img class="service-photo" src="landscape2.jpg" alt="An outdoor landscape with lawns and garden planting" width="640" height="427" loading="lazy">
                 <h3><span class="service-icon" aria-hidden="true">✦</span><span>And Much More</span></h3>
                 <p>Have another outdoor project in mind? Contact C&amp;G Services to discuss your property’s needs and request a free estimate.</p>
             </div>
