@@ -1215,6 +1215,8 @@ body.lightbox-open { overflow: hidden; }
     box-shadow: 0 0 18px rgba(228, 182, 50, 0.38);
 }
 
+.review-arrow[hidden] { display: none; }
+
 .review-empty {
     grid-column: 1 / -1;
     flex: 1 0 100%;
@@ -2567,27 +2569,32 @@ footer a:hover { text-decoration: underline; }
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">✂️</span><span>Lawn Mowing</span></h3>
                 <p>Professional mowing, trimming, and edging for a sharp, consistent, and well-maintained lawn finish.</p>
-                <a class="service-card-link" href="lawn-care-services-bucks-county.html">Lawn care services in Bucks County →</a>
+                <a class="service-card-link" href="lawn-mowing-bucks-county.html">Lawn mowing in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">🍂</span><span>Mulching</span></h3>
                 <p>Fresh mulch installation with clean bed lines, rich color, and a refined look that makes your landscape stand out.</p>
+                <a class="service-card-link" href="mulching-bucks-county.html">Mulching in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">❄️</span><span>Snow Removal</span></h3>
                 <p>Reliable winter service to help keep driveways, walkways, and outdoor areas safer during snow season.</p>
+                <a class="service-card-link" href="snow-removal-bucks-county.html">Snow Removal in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">🌱</span><span>Aeration</span></h3>
                 <p>Core aeration to support stronger roots, healthier soil, and a greener, fuller lawn throughout the season.</p>
+                <a class="service-card-link" href="aeration-bucks-county.html">Core Aeration in Bucks County →</a>
             </div>
             <div class="service-card">
                 <h3><span class="service-icon" aria-hidden="true">🧹</span><span>Spring Cleanup</span></h3>
                 <p>Seasonal cleanup that removes debris, refreshes your property, and prepares your yard for a clean new season.</p>
+                <a class="service-card-link" href="spring-cleanup-bucks-county.html">Spring Cleanup in Bucks County →</a>
             </div>
             <div class="service-card fall-leaf-card">
                 <h3><span class="service-icon" aria-hidden="true">🍁</span><span>Fall Leaf Cleanup</span></h3>
                 <p>Professional leaf clearing and seasonal cleanup to keep lawns, planting beds, walkways, and outdoor areas neat throughout the fall.</p>
+                <a class="service-card-link" href="leaf-cleanup-bucks-county.html">Fall Leaf Cleanup in Bucks County →</a>
             </div>
             <div class="service-card more-services-card">
                 <h3><span class="service-icon" aria-hidden="true">✦</span><span>And Much More</span></h3>
@@ -2685,9 +2692,7 @@ footer a:hover { text-decoration: underline; }
     <div class="reviews-stage">
         <button id="reviewPrev" class="review-arrow review-arrow-prev" type="button" aria-label="Show previous reviews">&#8249;</button>
         <div id="reviewsGrid" class="reviews-cards" aria-live="polite">
-            <div class="review-empty">
-                Customer reviews will appear here after they are submitted and approved.
-            </div>
+            <div class="review-empty"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class="google-review-button" href="https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755" target="_blank" rel="noopener noreferrer">Find C&amp;G on Google ↗</a></div></div>
         </div>
         <button id="reviewNext" class="review-arrow review-arrow-next" type="button" aria-label="Show next reviews">&#8250;</button>
     </div>
@@ -2696,7 +2701,7 @@ footer a:hover { text-decoration: underline; }
 
     <div class="review-form-card">
         <h3>Share Your Experience</h3>
-        <p>Were you happy with our work? Submit a review below. Reviews are checked before appearing publicly.</p>
+        <p>Tell us about your experience. Submit a review below. Reviews are checked before appearing publicly.</p>
         <form id="reviewForm">
             <div class="review-form-grid">
                 <div class="review-field">
@@ -2937,6 +2942,7 @@ footer a:hover { text-decoration: underline; }
     <a href="lawn-care-services-bucks-county.html">Lawn Care Services in Bucks County</a>
     <a href="mailto:cgserviceslandscaping1@gmail.com">cgserviceslandscaping1@gmail.com</a>
     <a href="https://www.facebook.com/p/CG-Services-Lawn-Care-100093026449679/" target="_blank" rel="noopener noreferrer">Facebook · C&amp;G Services Lawn Care ↗</a>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:18px" aria-label="Service pages"><a href="lawn-mowing-bucks-county.html">Lawn Mowing</a><a href="mulching-bucks-county.html">Mulching</a><a href="spring-cleanup-bucks-county.html">Spring Cleanup</a><a href="leaf-cleanup-bucks-county.html">Fall Leaf Cleanup</a><a href="aeration-bucks-county.html">Core Aeration</a><a href="snow-removal-bucks-county.html">Snow Removal</a></div>
 </footer>
 
 <a href="tel:2676363755" class="floating-call">📞 Call Now</a>
@@ -3015,13 +3021,13 @@ function toDocumentSnapshot(row) {
 async function addDoc(reference, payload) {
     const { error } = await dataClient
         .from(reference.table)
-        .insert(toDatabasePayload(payload));
+        .insert(toDatabasePayload(payload)).abortSignal(AbortSignal.timeout(8000));
     if (error) throw error;
     return {};
 }
 
 async function getDocs(reference) {
-    let request = dataClient.from(reference.table).select("*").order("created_at", { ascending: false });
+    let request = dataClient.from(reference.table).select("*").order("created_at", { ascending: false }).abortSignal(AbortSignal.timeout(8000));
     for (const filter of reference.filters || []) {
         if (filter.operator === "==") request = request.eq(filter.column, filter.value);
     }
@@ -3178,7 +3184,8 @@ function recordPublicFormSubmission(formKey, fingerprint) {
 
 async function sendOwnerEmailAlert(subject, fields) {
     try {
-        await fetch("https://formsubmit.co/ajax/cgserviceslandscaping1@gmail.com", {
+        const response = await fetch("https://formsubmit.co/ajax/cgserviceslandscaping1@gmail.com", {
+            signal: AbortSignal.timeout(10000),
             method: "POST",
             headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify({
@@ -3188,8 +3195,10 @@ async function sendOwnerEmailAlert(subject, fields) {
                 ...fields
             })
         });
+        const result = await response.json();
+        return response.ok && (result.success === true || result.success === "true");
     } catch (error) {
-        // The request remains safely stored in Supabase if email delivery is temporarily unavailable.
+        return false;
     }
 }
 // ===== END: PUBLIC FORM SPAM PROTECTION =====
@@ -3305,6 +3314,10 @@ function updateReviewCarouselState() {
 function buildReviewCarouselControls() {
     reviewDots.innerHTML = "";
 
+    const hasReviews = reviewsGrid.querySelector(".review") !== null;
+    reviewPrev.hidden = reviewNext.hidden = !hasReviews;
+    if (!hasReviews) { requestAnimationFrame(updateReviewCarouselState); return; }
+
     for (let index = 0; index < 3; index += 1) {
         const dot = document.createElement("button");
         dot.type = "button";
@@ -3348,7 +3361,7 @@ async function loadApprovedReviews() {
 
         reviewsGrid.innerHTML = "";
         if (approved.length === 0) {
-            reviewsGrid.innerHTML = '<div class="review-empty">Be the first customer to share an experience with C&amp;G Services.</div>';
+            reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
             buildReviewCarouselControls();
             return;
         }
@@ -3358,7 +3371,7 @@ async function loadApprovedReviews() {
         });
         buildReviewCarouselControls();
     } catch (error) {
-        reviewsGrid.innerHTML = '<div class="review-empty">Customer reviews are temporarily unavailable. Please check back soon.</div>';
+        reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
         buildReviewCarouselControls();
     }
 }
@@ -3425,8 +3438,19 @@ reviewForm.addEventListener("submit", async (event) => {
         reviewMessage.style.color = "#d9f99d";
         if (isAdmin) loadPendingReviews();
     } catch (error) {
-        reviewMessage.textContent = "Your review could not be submitted. Please try again later.";
-        reviewMessage.style.color = "#fecaca";
+        const emailed = await sendOwnerEmailAlert("C&G Services review for manual approval (email fallback)", {
+            Name: name, Service: service, Rating: `${rating} out of 5`, Review: review
+        });
+        if (emailed) {
+            recordPublicFormSubmission("review", protection.fingerprint);
+            reviewForm.reset();
+            reviewFormStartedAt = Date.now();
+            reviewMessage.textContent = "Thank you! Your review was emailed to C&G for review. It will not appear automatically on the website.";
+            reviewMessage.style.color = "#d9f99d";
+        } else {
+            reviewMessage.textContent = "We could not confirm delivery. Your review is still here. Please try again later or find us on Google.";
+            reviewMessage.style.color = "#fecaca";
+        }
     } finally {
         reviewSubmitBtn.disabled = false;
     }
@@ -3566,8 +3590,18 @@ contactForm.addEventListener("submit", async (event) => {
         showEstimateConfirmation();
         if (isAdmin) loadContactRequests();
     } catch (error) {
-        contactFormMessage.textContent = "Your request could not be sent. Please call 267-636-3755.";
-        contactFormMessage.style.color = "#b91c1c";
+        const emailed = await sendOwnerEmailAlert("New C&G Services estimate request (email fallback)", {
+            Name: name, Phone: phone, Service: service, Message: message
+        });
+        if (emailed) {
+            recordPublicFormSubmission("estimate", protection.fingerprint);
+            contactForm.reset();
+            contactFormStartedAt = Date.now();
+            showEstimateConfirmation();
+        } else {
+            contactFormMessage.textContent = "We could not confirm delivery. Your details are still here. Please call 267-636-3755 or use the email link to request an estimate.";
+            contactFormMessage.style.color = "#b91c1c";
+        }
     } finally {
         contactSubmitBtn.disabled = false;
     }
@@ -3903,7 +3937,7 @@ const configurationReady =
 
 if (configurationReady) {
     const supabaseGallery = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-        auth: { persistSession: false, autoRefreshToken: false }
+        auth: { persistSession: false, autoRefreshToken: false, storageKey: "cg-public-gallery" }
     });
 
     const imageExtensions = /\.(?:jpe?g|png|webp|gif|avif)$/i;
