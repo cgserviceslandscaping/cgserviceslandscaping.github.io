@@ -2692,7 +2692,7 @@ footer a:hover { text-decoration: underline; }
     <div class="reviews-stage">
         <button id="reviewPrev" class="review-arrow review-arrow-prev" type="button" aria-label="Show previous reviews">&#8249;</button>
         <div id="reviewsGrid" class="reviews-cards" aria-live="polite">
-            <div class="review-empty"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class="google-review-button" href="https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755" target="_blank" rel="noopener noreferrer">Find C&amp;G on Google ↗</a></div></div>
+            <div class="review-empty"><div><strong>Find C&amp;G on Google</strong><p>View our business profile or share your experience using the form below.</p><a class="google-review-button" href="https://share.google/u9WdqA9qLWDiRNL0i" target="_blank" rel="noopener noreferrer">Find C&amp;G on Google ↗</a></div></div>
         </div>
         <button id="reviewNext" class="review-arrow review-arrow-next" type="button" aria-label="Show next reviews">&#8250;</button>
     </div>
@@ -2793,9 +2793,9 @@ footer a:hover { text-decoration: underline; }
         <div class="google-review-copy">
             <div class="google-review-kicker">Customer Reviews</div>
             <h2 id="googleReviewsTitle">Find C&amp;G Landscaping Services on Google</h2>
-            <p>See our latest customer feedback and help others discover dependable local landscaping and lawn care.</p>
+            <p>Explore our business profile and share feedback about your landscaping and lawn care service.</p>
         </div>
-        <a class="google-review-button" href="https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755" target="_blank" rel="noopener noreferrer">Find Us on Google ↗</a>
+        <a class="google-review-button" href="https://share.google/u9WdqA9qLWDiRNL0i" target="_blank" rel="noopener noreferrer">View Our Google Profile ↗</a>
     </div>
 </section>
 <!-- ==================== END: GOOGLE REVIEWS CTA ==================== -->
@@ -3361,7 +3361,7 @@ async function loadApprovedReviews() {
 
         reviewsGrid.innerHTML = "";
         if (approved.length === 0) {
-            reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
+            reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>Find C&amp;G on Google</strong><p>View our business profile or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://share.google/u9WdqA9qLWDiRNL0i\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
             buildReviewCarouselControls();
             return;
         }
@@ -3371,7 +3371,7 @@ async function loadApprovedReviews() {
         });
         buildReviewCarouselControls();
     } catch (error) {
-        reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>See our customer feedback on Google</strong><p>Explore our Google listing or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://www.google.com/search?q=C%26G+LANDSCAPING+SERVICES+267-636-3755\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
+        reviewsGrid.innerHTML = "<div class=\"review-empty\"><div><strong>Find C&amp;G on Google</strong><p>View our business profile or share your experience using the form below.</p><a class=\"google-review-button\" href=\"https://share.google/u9WdqA9qLWDiRNL0i\" target=\"_blank\" rel=\"noopener noreferrer\">Find C&amp;G on Google \u2197</a></div></div>";
         buildReviewCarouselControls();
     }
 }
